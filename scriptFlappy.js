@@ -179,7 +179,7 @@ function game() {
     listeTuyaux.forEach(function (item) {
         context.drawImage(item.imageTuyaux, item.x, item.y, item.width, item.height);
     })
-    //mouvement
+    //mouvement 
     listeTuyaux.forEach(function (item) {
         item.x += vitesseTuyauxX;
     })
