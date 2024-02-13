@@ -2,10 +2,16 @@
 HEIGHT = 800; //innerHeight;
 WIDTH = 800; //innerWidth;
 
+/*
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+*/
+
+let fonctionEnCours = waitClickGame;
 
 //FPS:
 let lastRenderFPS = 0;
-let fpsInterval = 1000 / 85;
+let fpsInterval = 1000 / 60;
 
 let fps = 0;
 let moyenefps = 0;
@@ -99,9 +105,9 @@ window.onload = function () {
     var music = new Audio("song/music.wav")
     music.loop = true;
     music.play();
-
-
-    requestAnimationFrame(waitClickGame);
+    
+    setInterval(() => fonctionEnCours(), fpsInterval);
+    //requestAnimationFrame(waitClickGame);
     setInterval(AnnimationBird, 150) // 150ms = 0.15s (1s = 1000ms)
     setInterval(createTuyaux, tempEntreTuyaux)
     document.addEventListener("keydown", pressKey);
@@ -132,29 +138,23 @@ function initGame() {
     listeButton = [];
     listeTuyaux = [];
 
-    requestAnimationFrame(waitClickGame);
+    fonctionEnCours = waitClickGame;
 }
 
 function waitClickGame() {
-
-    if (!enGame) {
-        setTimeout(function () {
-            requestAnimationFrame(waitClickGame);
-        }, fpsInterval);
-    } else {
+    console.log("waitClickGame");
+   if (enGame) {
         bird.jump = true;
         bird.vitesseY = vitesseEnSaut;
-        requestAnimationFrame(game)
+        fonctionEnCours = game;
     }
 
     bird.y += bird.vitesseY;
 
     if (bird.vitesseY > 0 && targetPosMaxY < (bird.y + (bird.height / 2))) {
-        console.log("testt 1")
         bird.vitesseY *= -1;
     } else if (bird.vitesseY < 0 && targetPosMinY > (bird.y + (bird.height / 2))) {
         bird.vitesseY *= -1;
-        console.log("testt 2")
     }
 
     //affiche wallPapper:
@@ -180,17 +180,15 @@ function waitClickGame() {
 
 function game() {
     console.log("game");
-    if (!perdu) {
-        setTimeout(function () {
-            requestAnimationFrame(game);
-        }, fpsInterval);
-    }
-    else {
-        setTimeout(() => {
-            requestAnimationFrame(initPageFinGame);
-        }, fpsInterval);
-    }
-
+     if (!perdu) {
+        fonctionEnCours = game;
+     }
+     else {
+         setTimeout(() => {
+            fonctionEnCours = initPageFinGame;
+         }, fpsInterval);
+    }    
+    console.log("game");
     context.drawImage(imageWallPaper, 0, 0, WIDTH, possitionGroundY);
 
     //affiche score:
@@ -241,6 +239,8 @@ function game() {
     context.font = "48px verdana";
     context.textAlign = "center";
     context.fillText(moyenefps, WIDTH / 2, HEIGHT / 2);
+    
+   
 
 }
 
@@ -376,19 +376,14 @@ function initPageFinGame() {
     button1 = new Button((WIDTH / 2) - (largeurButton / 2), (HEIGHT / 2) + 100, largeurButton, hauteurButton, imageButtonRestart);
     listeButton.push(button1)
 
-
-    requestAnimationFrame(pageFinGame);
+    fonctionEnCours = pageFinGame;
 
 }
 
 function pageFinGame() {
-    if (!restartGame) {
-        setTimeout(() => {
-            requestAnimationFrame(pageFinGame);
-        }, fpsInterval);
-    } else {
+    if (restartGame) {
         restartGame = false;
-        requestAnimationFrame(initGame);
+        fonctionEnCours = initGame;
     }
 
     //affiche score:
