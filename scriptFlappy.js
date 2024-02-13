@@ -2,20 +2,11 @@
 HEIGHT = 800; //innerHeight;
 WIDTH = 800; //innerWidth;
 
-/*
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
-*/
 
 let fonctionEnCours = waitClickGame;
 
 //FPS:
-let lastRenderFPS = 0;
 let fpsInterval = 1000 / 60;
-
-let fps = 0;
-let moyenefps = 0;
-
 
 //tuyaux:
 let listeTuyaux = [];
@@ -113,14 +104,6 @@ window.onload = function () {
     document.addEventListener("keydown", pressKey);
     document.addEventListener("click", pressClick)
 
-    //// TEST 
-
-    setInterval(function () {
-        console.log("fps : " + fps);
-        moyenefps = fps;
-        fps = 0;
-    }, 1000);
-
 }
 
 
@@ -142,7 +125,6 @@ function initGame() {
 }
 
 function waitClickGame() {
-    console.log("waitClickGame");
    if (enGame) {
         bird.jump = true;
         bird.vitesseY = vitesseEnSaut;
@@ -179,16 +161,12 @@ function waitClickGame() {
 
 
 function game() {
-    console.log("game");
      if (!perdu) {
         fonctionEnCours = game;
      }
      else {
-         setTimeout(() => {
-            fonctionEnCours = initPageFinGame;
-         }, fpsInterval);
+        fonctionEnCours = initPageFinGame;
     }    
-    console.log("game");
     context.drawImage(imageWallPaper, 0, 0, WIDTH, possitionGroundY);
 
     //affiche score:
@@ -233,14 +211,6 @@ function game() {
     AugmenteScore();
     supprimeTuyaux();
     TestDefaite();
-
-    // TEST TEST FPS:
-    fps++;
-    context.font = "48px verdana";
-    context.textAlign = "center";
-    context.fillText(moyenefps, WIDTH / 2, HEIGHT / 2);
-    
-   
 
 }
 
@@ -300,9 +270,8 @@ function pressClick(event) {
     if (!enGame) {
         if (listeButton.length != 0) {
             //test si il clique dans un bouton:
-            listeButton.forEach(function (item, index) {
+            listeButton.forEach(function (item) {
                 if (siClickSurBouton(item, mouseX, mouseY)) {
-                    console.log("tu as clique sur le bouton : " + index)
                     restartGame = true;
                 }
             })
