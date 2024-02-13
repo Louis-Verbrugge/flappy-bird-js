@@ -104,6 +104,7 @@ window.onload = function () {
 
 function initGame() {
     perdu = false;
+    score = 0;
     bird = {
         x: 50,
         y: possitionGroundY / 2,
