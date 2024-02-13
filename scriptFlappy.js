@@ -1,6 +1,6 @@
 
-HEIGHT = 800; //innerHeight;
-WIDTH = 800; //innerWidth;
+HEIGHT = 800;
+WIDTH = 800;
 
 
 let fonctionEnCours = waitClickGame;
@@ -91,11 +91,6 @@ window.onload = function () {
     //image button:
     imageButtonRestart = new Image();
     imageButtonRestart.src = "img/restart.png";
-
-    //sound
-    var music = new Audio("song/music.wav")
-    music.loop = true;
-    music.play();
     
     setInterval(() => fonctionEnCours(), fpsInterval);
     //requestAnimationFrame(waitClickGame);
@@ -367,4 +362,3 @@ function pageFinGame() {
     })
 
 }
-
