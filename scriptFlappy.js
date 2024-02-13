@@ -138,7 +138,7 @@ function waitClickGame() {
     context.drawImage(imageWallPaper, 0, 0, WIDTH, possitionGroundY);
 
     //affiche bird:
-    context.drawImage(imageBird, 17 * bird.spreetSheetX, 0, 17, 12, bird.x, bird.y, bird.width, bird.height);
+    context.drawImage(imageBird, 16.9 * bird.spreetSheetX, 0, 16.9, 12, bird.x, bird.y, bird.width, bird.height);
 
     //groud:
     for (let i = 0; i < nombreImageGround + 1; i++) {
@@ -334,12 +334,10 @@ function supprimeTuyaux() {
 function initPageFinGame() {
 
     enGame = false;
-
     let largeurButton = WIDTH / 4;
     let hauteurButton = HEIGHT / 10;
     button1 = new Button((WIDTH / 2) - (largeurButton / 2), (HEIGHT / 2) + 100, largeurButton, hauteurButton, imageButtonRestart);
     listeButton.push(button1)
-
     fonctionEnCours = pageFinGame;
 
 }
