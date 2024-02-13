@@ -187,7 +187,7 @@ function game() {
     if (bird.jump) {
         bird.jump = false;
     }
-    context.drawImage(imageBird, 17 * bird.spreetSheetX, 0, 17, 12, bird.x, bird.y, bird.width, bird.height);
+    context.drawImage(imageBird, 16.9 * bird.spreetSheetX, 0, 16.9, 12, bird.x, bird.y, bird.width, bird.height);
 
     //groud:
     for (let i = 0; i < nombreImageGround + 1; i++) {
